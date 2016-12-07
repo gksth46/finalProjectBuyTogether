@@ -6,7 +6,5 @@ $(document).ready(function (){
 	
 	controller.listAll();
 	
-	
-	
 });
 

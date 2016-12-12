@@ -14,6 +14,7 @@ public class User {
    private String gender;
    private String nickName;
    private String profile;
+   private String region;
    private int reputation;
 
    public User() {
@@ -98,6 +99,14 @@ public class User {
 
    public void setProfile(String profile) {
       this.profile = profile;
+   }
+
+   public String getRegion() {
+      return region;
+   }
+
+   public void setRegion(String region) {
+      this.region = region;
    }
 
    public int getReputation() {

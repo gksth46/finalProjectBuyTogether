@@ -1,4 +1,4 @@
-$('head').append('<script src=\'../../resources/js/buytogether/buytogetherController.js\'><\/script>');
+$('head').append('<script src=\'/resources/js/buytogether/buytogetherController.js\'><\/script>');
 
 $(document).ready(function (){
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/js/user/loginEventHandler.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- body -->
+	<div class="container">
+	
+		<!-- loginBody -->
+		<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
+			<h4>로그인</h4>
+			
+			<!-- login -->
+			<div class="form-group has-feedback">
+				<input type="text" class="form-control" name="id" id="id" placeholder="id">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>				
+			</div>
+					
+			<div class="form-group has-feedback">
+				<input type="password" class="form-control" name="pw" id="pw" placeholder="password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+						
+			<div class="checkbox">
+				<label class="margin-top-0"> 
+					<input type="checkbox" name="useCookie" id="useCookie">&nbsp;로그인 기억하기
+				</label>
+			</div>
+
+			<!-- login button -->
+			<div class="form-group">
+				<button type="button" class="btn btn-default btn-block" id="joinin">회원가입</button>				
+				<button type="button" class="btn btn-primary btn-block" id="login">로그인</button>				
+				<button type="button" class="btn btn-facebook btn-block" id="FBlogin">페이스북으로 로그인</button>	
+				<button type="button" class="btn btn-naver btn-block" id="NVlogin" >네이버로 로그인</button>		
+			</div>
+	
+		</div>
+	
+	</div>
+
+</body>
+</html>

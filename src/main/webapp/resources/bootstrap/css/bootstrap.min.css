@@ -1,3 +1,81 @@
+/* customize bootstrap css */
+
+/* 페이스북 버튼 */
+.btn-facebook {
+	color: #fff;
+	background-color: #3A5897;
+	border-color: #3A5897
+}
+
+.btn-facebook.active, .btn-facebook.focus, .btn-facebook:active,
+	.btn-facebook:focus, .btn-facebook:hover, .open>.dropdown-toggle.btn-facebook
+	{
+	color: #fff;
+	background-color: #334e84;
+	border-color: #334e84
+}
+
+.btn-facebook.active, .btn-facebook:active, .open>.dropdown-toggle.btn-facebook
+	{
+	background-image: none
+}
+
+.btn-facebook.disabled, .btn-facebook.disabled.active, .btn-facebook.disabled.focus,
+	.btn-facebook.disabled:active, .btn-facebook.disabled:focus, .btn-facebook.disabled:hover,
+	.btn-facebook[disabled], .btn-facebook[disabled].active, .btn-facebook[disabled].focus,
+	.btn-facebook[disabled]:active, .btn-facebook[disabled]:focus,
+	.btn-facebook[disabled]:hover, fieldset[disabled] .btn-facebook, fieldset[disabled] .btn-facebook.active,
+	fieldset[disabled] .btn-facebook.focus, fieldset[disabled] .btn-facebook:active,
+	fieldset[disabled] .btn-facebook:focus, fieldset[disabled] .btn-facebook:hover
+	{
+	background-color: #337ab7;
+	border-color: #2e6da4
+}
+
+.btn-facebook .badge {
+	color: #337ab7;
+	background-color: #fff
+}
+
+/* 네이버 버튼 */
+.btn-naver {
+	color: #fff;
+	background-color: #1EC800;
+	border-color: #1EC800
+}
+
+.btn-naver.active, .btn-naver.focus, .btn-naver:active,
+	.btn-naver:focus, .btn-naver:hover, .open>.dropdown-toggle.btn-naver
+	{
+	color: #fff;
+	background-color: #18a400;
+	border-color: #18a400
+}
+
+.btn-naver.active, .btn-naver:active, .open>.dropdown-toggle.btn-naver
+	{
+	background-image: none
+}
+
+.btn-naver.disabled, .btn-naver.disabled.active, .btn-naver.disabled.focus,
+	.btn-naver.disabled:active, .btn-naver.disabled:focus, .btn-naver.disabled:hover,
+	.btn-naver[disabled], .btn-naver[disabled].active, .btn-naver[disabled].focus,
+	.btn-naver[disabled]:active, .btn-naver[disabled]:focus,
+	.btn-naver[disabled]:hover, fieldset[disabled] .btn-naver, fieldset[disabled] .btn-naver.active,
+	fieldset[disabled] .btn-naver.focus, fieldset[disabled] .btn-naver:active,
+	fieldset[disabled] .btn-naver:focus, fieldset[disabled] .btn-naver:hover
+	{
+	background-color: #1EC800;
+	border-color: #2e6da4
+}
+
+.btn-naver .badge {
+	color: #337ab7;
+	background-color: #fff
+}
+
+
+
 /*!
  * Bootstrap v3.3.4 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -3335,9 +3413,9 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 	outline: 5px auto -webkit-focus-ring-color;
 	outline-offset: -2px
 }
-
+/* 지은이가바꿈 333 - > fff */
 .btn.focus, .btn:focus, .btn:hover {
-	color: #333;
+	color: #fff;
 	text-decoration: none
 }
 

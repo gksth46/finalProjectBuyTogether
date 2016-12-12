@@ -1,4 +1,4 @@
-$('head').append('<script src=\'../../resources/js/buytogether/buytogetherDao.js\'><\/script>');
+$('head').append('<script src=\'/resources/js/buytogether/buytogetherDao.js\'><\/script>');
 
 
 function buytogetherController() {

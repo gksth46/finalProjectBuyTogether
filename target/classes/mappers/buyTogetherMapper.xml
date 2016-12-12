@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.buy.together.mappers.buyTogetherMapper">
+<mapper namespace="com.buy.together.mapper.buyTogetherMapper">
 
 	<!-- 같이사냥 리스트 조회 -->
 	<select id="buyTogetherList" resultType="com.buy.together.dto.BuyTogetherDTO">

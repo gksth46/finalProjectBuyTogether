@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mapper.LoginMapper">
+	<!-- 같이사냥 로그인 -->
+	<select id="buyTogetherLogin" resultType="User">
+		select *
+		from user
+		where id = #{id} and pw = #{pw}
+	</select>
+	<!-- 네이버/페이스북 로그인 -->
+	<select id="externalLogin" resultType="User">
+		select *
+		from user
+		where id = #{id}
+	</select>
+	<!-- 신규회원 등록 -->
+	<insert id="create">
+		insert into user (id, name, email)
+		values(#{id}, #{name}, #{email})
+	</insert>
+	
+</mapper>

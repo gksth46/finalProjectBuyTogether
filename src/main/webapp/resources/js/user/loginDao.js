@@ -81,9 +81,9 @@ function loginDao() {
 			async : false,	
 			success:function(data){
 				if(data.nickName==null) { //신규 회원
-					new loginDao().insertUserInfoDao(data);
+					insertUserInfoDao(data);
 				} else { //기존 회원
-					new loginDao().homeDao();
+					homeDao(data);
 				}
 			}
 		});
@@ -176,8 +176,8 @@ function loginDao() {
 	};
 
 	//로그인 성공 시 메인 화면으로 이동
-	this.homeDao = function() {		
-
+	this.homeDao = function(user) {		
+		//회원정보세션 저장
 		document.location = "/home";
 
 	};

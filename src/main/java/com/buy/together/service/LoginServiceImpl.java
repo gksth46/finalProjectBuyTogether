@@ -34,12 +34,6 @@ public class LoginServiceImpl implements LoginService {
 		
 		User loginUser = loginDao.buyTogetherLogin(user);
 		
-		if(loginUser!=null) { //로그인 성공 시 세션에 저장
-
-			//session.setAttribute("user", loginUser);
-			
-		}
-		
 		return loginUser;
 	}
 
@@ -53,8 +47,6 @@ public class LoginServiceImpl implements LoginService {
 			loginDao.create(user);
 			
 		} 
-
-		//session.setAttribute("user", user);
 		
 		return isNewUser;
 		
@@ -97,7 +89,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		User naverUser = loginDao.externalLogin(user); //네이버 유저의 아이디가 DB에 있는지 확인
 		
-		if(naverUser == null) { //기존 회원
+		if(naverUser == null) { //신규 회원
 
 			loginDao.create(user);
 			

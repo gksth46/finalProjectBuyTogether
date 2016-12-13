@@ -15,4 +15,5 @@ public interface FaqDao {
 	public List<Board> faqInfoList() throws Exception;
 
 	public List<Board> faqCenterList() throws Exception;
+
 }

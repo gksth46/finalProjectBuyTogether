@@ -6,17 +6,7 @@ function loginController() {
 	//login controller
 	this.requestLogin = function(user) {
 		
-		var result = dao.LoginDao(user);
-		
-		if(result=="success") { //로그인 성공 시
-			
-			dao.homeDao();
-			
-		} else { //로그인 실패 시
-			
-			dao.loginDao();
-			
-		}
+		dao.LoginDao(user);
 		
 	};
 	//Naver login controller

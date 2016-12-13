@@ -27,16 +27,17 @@ public class LoginRestController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginRestController.class);
 	
 	@RequestMapping(value="/buyTogetherLogin", method = RequestMethod.POST)
-	public ResponseEntity<String> buyTogetherLogin(@RequestBody User user) {
+	public ResponseEntity<User> buyTogetherLogin(@RequestBody User user) {
 		
-		ResponseEntity<String> entity = null;
+		ResponseEntity<User> entity = null;
+		User userInfo = user;
 		
 		try {
-			loginService.buyTogetherLogin(user);
-			entity = new ResponseEntity<String>("success", HttpStatus.OK); // HttpStatus.OK == 200
+			userInfo = loginService.buyTogetherLogin(user);
+			entity = new ResponseEntity<User>(userInfo, HttpStatus.OK); // HttpStatus.OK == 200
 		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST); // HttpStatus.BAD_REQUEST == 400
+			entity = new ResponseEntity<User>(userInfo, HttpStatus.BAD_REQUEST); // HttpStatus.BAD_REQUEST == 400
 		}
 		
 		return entity;

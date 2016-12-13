@@ -15,11 +15,12 @@ $footer-color: lighten($general-font-color, 15%);
 			> .c-line-left {
 				margin-bottom: 30px;
 			}
+		
 		}
-
+						
 		.c-container {
-			padding: 0 10px;
-			margin-bottom: 40px;
+			padding: 0 10px ;
+			margin-bottom: 30px;
 
 			&.c-first {
 				padding-left: 0;
@@ -31,12 +32,12 @@ $footer-color: lighten($general-font-color, 15%);
 
 			.c-links {
 				padding: 0;
-
+				
 				> li {
 					list-style: none;
 					padding: 5px 0;
 					border-bottom: 1px solid #394047;
-
+					
 					> a {
 						color: $general-font-color;
 
@@ -47,10 +48,10 @@ $footer-color: lighten($general-font-color, 15%);
 
 					&:last-child {
 						border-bottom: none;
-					}
+					}				
 				}
 			}
-
+			
 			.c-blog {
 
 				> .c-post {

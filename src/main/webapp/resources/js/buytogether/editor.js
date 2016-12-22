@@ -11,55 +11,59 @@ function validForm(editor) {
 	
 	if($('#title').val() == '') {
 		
-		alert("제목을 입력하세요");
-		
 		$('#title').focus(); 
+		$('#titleCheck').show();
 		return;
-	}
-	if($('#address').val() == '') {
 		
-		alert("주소를 입력하세요");
-		
-		$('#address').focus(); 
-		return;
+	} else {
+		$('#titleCheck').hide();
 	}
 	if($('#category_number').val() == '') {
 		
-		alert("카테고리를 선택하세요");
-		
 		$('#category_number').focus(); 
+		$('#categoryCheck').show();
 		return;
+		
+	} else {
+		$('#categoryCheck').hide();
 	}
 	if($('#huntingType').val() == '') {
 		
-		alert("사냥방식 선택하세요");
-		
 		$('#huntingType').focus(); 
+		$('#huntingTypeCheck').show();
 		return;
+		
+	} else {
+		$('#huntingTypeCheck').hide();
 	}
 	if($('#duedate').val() == '') {
 		
-		alert("마감일을 입력세요");
-		
 		$('#duedate').focus(); 
+		$('#dueDateCheck').show();
 		return;
+		
+	} else {
+		$('#dueDateCheck').hide();
 	}
 	if($('#joinin_number').val() == '') {
 		
-		alert("참여정원을 입력하세요");
-		
 		$('#joinin_number').focus(); 
+		$('#joininCheck').show();
 		return;
+		
+	} else {
+		$('#joininCheck').hide();
 	}
 	
 	if($('#price').val() == '') {
 		
-		alert("가격을 입력하세요");
-		
 		$('#price').focus(); 
+		$('#priceCheck').show();
 		return;
+		
+	} else {
+		$('#priceCheck').hide();
 	}
-
 	return true;
 }
 
@@ -81,6 +85,23 @@ function setForm(editor) {
 	textarea.name = 'content';
 	textarea.value = content;
 	form.createField(textarea);
+
+	/* 아래의 코드는 첨부된 데이터를 필드를 생성하여 값을 할당하는 부분으로 상황에 맞게 수정하여 사용한다.
+         첨부된 데이터 중에 주어진 종류(image,file..)에 해당하는 것만 배열로 넘겨준다. */
+/*	var images = editor.getAttachments('image');
+	
+	for (i = 0; i < images.length; i++) {
+		// existStage는 현재 본문에 존재하는지 여부
+		
+		if (images[i].existStage) {
+			// data는 팝업에서 execAttach 등을 통해 넘긴 데이터
+			input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'attach_image';
+			input.value = images[i].data.imageurl;  // 예에서는 이미지경로만 받아서 사용
+			form.createField(input);
+		}
+	}*/
 
 	return true;
 }

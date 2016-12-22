@@ -46,8 +46,6 @@ public class BuyTogether {
 		this.content = content;
 	}
 
-	
-
 	public Timestamp getWriteDate() {
 		return writeDate;
 	}

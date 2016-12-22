@@ -6,7 +6,7 @@ import com.buy.together.domain.Board;
 
 public interface FaqService {
 
-public List<Board> faqAllList() throws Exception;
+	public List<Board> faqAllList() throws Exception;
 	
 	public List<Board> faqUserList() throws Exception;
 	

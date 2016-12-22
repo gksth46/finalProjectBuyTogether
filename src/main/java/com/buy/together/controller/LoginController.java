@@ -15,65 +15,56 @@ import com.buy.together.domain.User;
 import com.buy.together.service.LoginService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/login")
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Inject
 	private LoginService loginService;
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() throws Exception {
+	
+	//로그인 화면 호출
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String requestLogin() throws Exception {
 		
 		logger.info("login GET");
 		
-		return "/views/user/login";
+		return "/views/login/login";
 		
 	}
 	
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String requestInsertBasicInfo(@RequestParam("id") String id, @RequestParam("name") String name,
-			@RequestParam("email") String email, Model model) throws Exception {
+	//필수정보 등록 화면 호출
+	@RequestMapping(value = "/basicUserInfo", method = RequestMethod.GET)
+	public String requestInsertBasicInfo() throws Exception {
 		
-		logger.info("requestInsertBasicInfo GET");
-		User user = new User();
-		user.setId(id);
-		user.setName(name);
-		user.setEmail(email);
-		model.addAttribute(user);
-		
-		return "/";
+		return "/views/user/basicUserInfo";
 		
 	}
 	
-	@RequestMapping(value="/naverCallback", method = RequestMethod.GET)
-	public String callback(@RequestParam String state, @RequestParam String code, HttpServletRequest request, Model model) throws Exception {
+	//네이버로그인 API callback1
+	@RequestMapping(value="/naverCallback1", method = RequestMethod.GET)
+	public String requestCallback1(@RequestParam String state, @RequestParam String code, HttpServletRequest request, Model model) throws Exception {
 
-		String storedState = (String) request.getSession().getAttribute("state");  //세션에 저장된 토큰을 받아옵니다.
-
-		if (!state.equals(storedState)) {             //세션에 저장된 토큰과 인증을 요청해서 받은 토큰이 일치하는지 검증합니다.
+		String storedState = (String) request.getSession().getAttribute("state"); //세션에 저장된 토큰 호출
+		
+		if (!state.equals(storedState)) { //세션에 저장된 토큰과 인증을 요청해서 받은 토큰이 일치하는지 검증
 			
-			System.out.println("401 unauthorized");   //인증이 실패했을 때의 처리 부분입니다.
-			
-			return "/views/user/login";
+			System.out.println("401 unauthorized"); //인증이 실패했을 때,
+			return "redirect:/login";
 			
 		} else {
 			
-			User user = loginService.NaverUserLogin(state, code);
-
-			return "/views/user/info";
-			
+			loginService.NaverUserLogin(state, code);
+			return "redirect:/login/naverCallback";
 		}
-	
+		
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() throws Exception {
+	//네이버로그인 API callback
+	@RequestMapping(value="/naverCallback", method = RequestMethod.GET)
+	public String requestCallback() throws Exception {
 		
-		logger.info("test GET");
-		
-		return "/views/user/test";
+		return "/views/login/naverCallback";
 		
 	}
 

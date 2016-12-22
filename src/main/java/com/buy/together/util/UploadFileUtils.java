@@ -73,14 +73,18 @@ public class UploadFileUtils {
 		
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
 		
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,100);
-		
+		int imgwidth = Math.min(sourceImg.getHeight(),  sourceImg.getWidth());
+		int imgheight = imgwidth;
+			
+		BufferedImage scaledImage = Scalr.crop(sourceImg, (sourceImg.getWidth() - imgwidth)/2, (sourceImg.getHeight() - imgheight)/2, imgwidth, imgheight, null);
+		BufferedImage resizedImage = Scalr.resize(scaledImage, 300, 300, null);
+			
 		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
 		
 		File newFile = new File(thumbnailName);
 		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		
-		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+		ImageIO.write(resizedImage, formatName.toUpperCase(), newFile);
 		
 		return thumbnailName.substring(uploadPath.length()).replace(File.pathSeparatorChar, '/');
 		

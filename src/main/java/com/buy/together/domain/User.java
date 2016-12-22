@@ -12,7 +12,7 @@ public class User {
    private String phone_number;
    private Date birthdate;
    private String gender;
-   private String nickName;
+   private String nickname;
    private String profile;
    private String region;
    private int reputation;
@@ -20,7 +20,18 @@ public class User {
    public User() {
 
    }
+   
+   public User(int user_number, String nickname) { //닉네임 설정시 사용
+	   this.user_number = user_number;
+	   this.nickname = nickname;
+   }
 
+   public User(int user_number, String name, String email) { //네이버 로그인시 사용
+	   this.user_number = user_number;
+	   this.name = name;
+	   this.email = email;
+   }
+   
    public int getUser_number() {
       return user_number;
    }
@@ -85,12 +96,12 @@ public class User {
       this.gender = gender;
    }
 
-   public String getNickName() {
-      return nickName;
+   public String getNickname() {
+      return nickname;
    }
 
-   public void setNickName(String nickName) {
-      this.nickName = nickName;
+   public void setNickname(String nickname) {
+      this.nickname = nickname;
    }
 
    public String getProfile() {

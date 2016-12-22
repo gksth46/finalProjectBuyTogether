@@ -3,7 +3,6 @@ Core script to handle the entire theme and core functions
 **/
 
 var App = function() {
-
     // IE mode
     var isRTL = false;
     var isIE9 = false;
@@ -11,7 +10,7 @@ var App = function() {
     var isIE = false;
 
     var resizeHandlers = [];
-
+   
     // initializes main settings
     var handleInit = function() {
         isIE9 = !!navigator.userAgent.match(/MSIE 9.0/);
@@ -256,11 +255,11 @@ var App = function() {
         //main function to initiate the theme
         init: function() {
             //IMPORTANT!!!: Do not modify the core handlers call order.
-
+        	
             //Core handlers
             handleHeight();
             this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
-
+            
             handleInit(); // initialize core variables
             handleOnResize(); // set and handle responsive    
 
@@ -300,7 +299,7 @@ var App = function() {
 
         // wrJangoer function to scroll(focus) to an element
         scrollTo: function(el, offeset) {
-            var pos = (el && el.size() > 0) ? el.offset().top : 0;
+            var pos = (el && el.length > 0) ? el.offset().top : 0;
 
             if (el) {
                 if ($('body').hasClass('page-header-fixed')) {

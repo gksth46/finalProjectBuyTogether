@@ -5,12 +5,16 @@ public class UserAddress {
 	private int user_address_number;
 	private String user_sido;
 	private String user_sigungu;
-	private String user_road_address;
-	private String user_detail;
 	private int user_number;
 
 	public UserAddress() {
 		
+	}
+	
+	public UserAddress(String user_sido, String user_sigungu,int user_number) {
+		this.user_sido = user_sido;
+		this.user_sigungu = user_sigungu;
+		this.user_number = user_number;
 	}
 
 	public int getUser_address_number() {
@@ -35,22 +39,6 @@ public class UserAddress {
 
 	public void setUser_sigungu(String user_sigungu) {
 		this.user_sigungu = user_sigungu;
-	}
-
-	public String getUser_road_address() {
-		return user_road_address;
-	}
-
-	public void setUser_road_address(String user_road_address) {
-		this.user_road_address = user_road_address;
-	}
-
-	public String getUser_detail() {
-		return user_detail;
-	}
-
-	public void setUser_detail(String user_detail) {
-		this.user_detail = user_detail;
 	}
 
 	public int getUser_number() {

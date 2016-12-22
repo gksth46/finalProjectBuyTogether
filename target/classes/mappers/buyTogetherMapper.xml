@@ -3,30 +3,68 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.buy.together.mapper.buyTogetherMapper">
+<mapper namespace="com.buy.together.mappers.buyTogetherMapper">
 
-	<!-- 같이사냥 리스트 조회 -->
-	<select id="buyTogetherList" resultType="com.buy.together.dto.BuyTogetherDTO">
-		select bt.buytogether_number, bt.title, bt.content, bt.writeDate, bt.updateDate, bt.duedate, bt.joinin_number,
-				bt.price, addr.longitude, addr.latitude, addr.buytogether_address_sido, addr.buytogether_address_sigungu, c.category_name,
-				u.nickname, u.reputation, hs.status_name, ht.hunting_type
-		from buytogether bt, buytogetheraddress addr, huntingtype ht,
-			 huntingstatus hs, category c, user u
-		where addr.buytogether_number = bt.buytogether_number and hs.status_number = bt.status_number and
-			  ht.hunting_type_number = bt.hunting_type_number and c.category_number = bt.category_number and
-			  bt.user_number = u.user_number
+	<select id="userInterestCount" resultType="Integer">
+		select count(interest_number)
+		from interest
+		where user_number = #{user_number}
+	</select>
+	
+	<!-- 같이사냥 서치카운트 -->
+	<select id="searchBuyTogetherCount" resultType="Integer">
+		select count(bt.buytogether_number)
+		from user u, buytogether bt
+		left outer join buytogetheraddress addr
+		on addr.buytogether_number = bt.buytogether_number 
+		<where>
+			u.user_number = bt.user_number
+			<if test = "user_number != '' and user_number != 0">
+				and bt.category_number in (select category_number from interest where user_number = #{user_number})
+			</if>
+		</where>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 같이사냥(지도)리스트 -->
+	<select id="searchBuyTogetherMapList" resultType="com.buy.together.dto.BuyTogetherDTO">
+	 	<![CDATA[
+        select bt.buytogether_number, bt.title, u.nickname, u.reputation, addr.latitude, addr.longitude
+        from user u,  buytogether bt, buytogetheraddress addr
+        where u.user_number = bt.user_number and bt.buytogether_number = addr.buytogether_address_number
+		]]>
+
+		<include refid="search"></include>
+			  
+		<![CDATA[
+		 order by sqrt(round(round(37.4785252-addr.latitude,10)*111000,10) * round(round(37.4785252 - addr.latitude,10)*111000,10)+  
+					round(round(126.8809673 - addr.longitude,10)*88800,10) * round(round(126.8809673 - addr.longitude,10)*88800,10))/1000 asc,
+					bt.buytogether_number desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
+	<!-- 같이사냥리스트 -->
+	<select id="searchBuyTogetherList" resultType="com.buy.together.dto.BuyTogetherDTO">
+	 	<![CDATA[
+        select bt.buytogether_number, bt.title, u.nickname, u.reputation, addr.latitude, addr.longitude, bt.category_number
+        from  user u, buytogether bt
+        left outer join buytogetheraddress addr on addr.buytogether_number = bt.buytogether_number
+		]]>
+		<where>
+			u.user_number = bt.user_number
+			<if test = "user_number != '' and user_number != 0">
+				and bt.category_number in (select category_number from interest where user_number = #{user_number})
+			</if>
+		</where>
+		<include refid="search"></include>
+		<![CDATA[
 		order by buytogether_number desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
 	</select>
 	
-	<!-- 같이사냥 게시글의 사진조회 -->
-	<select id="photoList" resultType="attachedPhoto">
-		select *
-		from attachedphoto
-		where board_type_number = 5 and buytogether_number = #{buytogether_number}
-		order by photo_number desc
-	</select>
-	
-		<!-- 같이사냥 카테고리 조회 -->
+	<!-- 같이사냥 카테고리 조회 -->
 	<select id="categoryList" resultType="Category">
 		select *
 		from category
@@ -36,6 +74,20 @@
 	<select id="huntingTypeList" resultType="HuntingType">
 		select *
 		from huntingtype
+	</select>
+	
+	<!-- 같이사냥 사냥상태 조회 -->
+	<select id="huntingStatusList" resultType="HuntingStatus">
+		select *
+		from huntingstatus
+	</select>
+	
+	<!-- 같이사냥 게시글의 사진조회 -->
+	<select id="photoList" resultType="attachedPhoto">
+		select *
+		from attachedphoto 
+		where board_type_number = 5 and buytogether_number = #{buytogether_number}
+		order by photo_number desc
 	</select>
 	
 	<!-- 같이사냥 글쓰기 1.게시글쓰기 -->
@@ -63,6 +115,34 @@
 		values (#{latitude}, #{longitude}, #{buyTogether_address_sido}, #{buyTogether_address_sigungu}, #{buyTogether_address_road_address}, #{buyTogether_address_detail}, #{buyTogether_number});
 	</insert>
 	
+	<!-- 검색용 코드 -->
+	<sql id="search">
+		<if test="category_number != 0 and category_number != ''">
+			and bt.category_number = #{category_number}
+		</if>
+		<if test="hunting_type_number != 0 and hunting_type_number != ''">
+			and bt.hunting_type_number = #{hunting_type_number}
+		</if>
+		<if test="hunting_status_number != 0 and hunting_type_number != ''">
+			and bt.hunting_status_number = #{hunting_status_number}
+		</if>
+		<if test="buytogether_address_sido != null and buytogether_address_sido != ''">
+			and addr.buytogether_address_sido = #{buytogether_address_sido}
+		</if>
+		<if test="buytogether_address_sigungu != null and buytogether_address_sigungu != ''">
+			and addr.buytogether_address_sigungu = #{buytogether_address_sigungu}
+		</if>
+		<if test="regDate != null and regDate != ''">
+			and bt.writeDate >= date_sub(now(), interval #{regDate} day)
+		</if>
+		<if test="keyword != null and keyword != ''">
+			and (( bt.title like CONCAT('%', #{keyword}, '%'))
+			OR ( bt.content like CONCAT('%', #{keyword}, '%')))
+		</if>
+	</sql>
+	
 </mapper>
+
+
 
 

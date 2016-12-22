@@ -8,400 +8,229 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 웹 브라우저에서 다양한 언어 사용 가능 -->
 <meta charset="UTF-8">
+<!---------------------공통스크립트--------------------->
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<link href="/resources/theme/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/css/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+<link href="/resources/theme/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/animate.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/theme/plugin/plugins.css" rel="stylesheet" type="text/css" />
+<script src="/resources/theme/js/app.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components.js" type="text/javascript"></script>
+<script src="/resources/theme/js/components-shop.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/NotoKRRegular.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/simple-line-icons.css" type="text/css">
+<link rel="stylesheet" href="/resources/theme/font/font-awesome.css" type="text/css">
+<!-------------------------------------------------->
 
 <!-- Bootstrap 적용 부분 -->
-<link href="/resources/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- jQuery 부분 -->
-<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
-<!-- Bootstrap에서 사용하는 자바스크립트 부분 -->
-<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&amp;subset=all'
+	rel='stylesheet' type='text/css'>
+<link href="/resources/theme/plugin/socicon.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="/resources/theme/plugin/bootstrap-social.css"
+	rel="stylesheet" type="text/css" />
 
 <!--  핸들바를 쓰기 위한 스크립트!!! -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <script src="/resources/js/faq/faqEventHandler.js"></script>
 
-
-<style type="text/css">
-.centered {
-	text-align: center;
-}
-
-th, td {
-	text-align: center;
-}
-</style>
-
-<title>Insert title here</title>
 </head>
-<body>
-	<div class="container">
-	<br>
-		<div class="row">
-			<form>
-				<h1 class="centered">FAQ</h1>
-			</form>
-		</div>
-
-		<br> <br>
-
-
-		<div class="row">
-			
-			<div class="box">
-
-				<!-- 하단 Tap  -->
-				<div class="tabbable">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1" data-toggle="tab">전체보기</a></li>
-						<li role="presentation"><a href="#tab2" data-toggle="tab">회원가입</a></li>
-						<li role="presentation"><a href="#tab3" data-toggle="tab">사냥관련</a></li>
-						<li role="presentation"><a href="#tab4" data-toggle="tab">정보관련</a></li>
-						<li role="presentation"><a href="#tab5" data-toggle="tab">고객센터</a></li>
-					</ul>
-
-					<!-------------- tab content 시작 ----------------->
-					<div class="tab-content">
-
-						<!-------------------- [전체보기] 관련 1번째 텝-------------- -->
-						<div class="tab-pane fade in active" id="tab1">
-
-							<!-- 상단 테이블 -->
-							<div>
-								<table class="table">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-										</tr>
-									</thead>
-								</table>
-
-								<!-- 바디 테이블 -->
-								<table class="table table-striped">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-
-									<!------------------- Template + Data ---------------------->
-									<tbody class="table-group faqAllList" id="accordion">
-
-										<!-- 여기에 faq[전체보기] 리스트 추가 -->
-
-									</tbody>
-								</table>
-								<!-- 상단 테이블  끝 -->
-							</div>
-						</div>
-
-						<!----------------- [회원관련] 2번째 텝  -------------------------->
-						<div class="tab-pane fade" id="tab2">
-
-							<!-- 상단 테이블 -->
-							<div>
-								<table class="table">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-										</tr>
-									</thead>
-								</table>
-
-								<!-- 바디 테이블 -->
-								<table class="table table-striped">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-
-									<!------------------- Template + Data ---------------------->
-									<tbody class="table-group faqUserList" id="accordion">
-
-										<!-- 여기에 faq [회원관련]리스트 추가 -->
-
-									</tbody>
-								</table>
-								<!-- 상단 테이블  끝 -->
-							</div>
-							<!-- [회원관련] 2번째 텝 끝-->
-						</div>
-
-						<!--------------- [사냥관련] 3번째 텝  ------------------------>
-						<div class="tab-pane fade" id="tab3">
-
-							<!-- 상단 테이블 -->
-							<div>
-								<table class="table">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-										</tr>
-									</thead>
-								</table>
-
-								<!-- 바디 테이블 -->
-								<table class="table table-striped">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-
-									<!------------------- Template + Data ---------------------->
-									<tbody class="table-group faqBuyList" id="accordion">
-
-										<!-- 여기에 faq [사냥관련]리스트 추가 -->
-
-									</tbody>
-								</table>
-								<!-- 상단 테이블  끝 -->
-							</div>
-							<!-- [사냥관련] 3번째 텝 끝-->
-						</div>
-
-						<!--------------- [정보관련] 4번째 텝  -------------------->
-						<div class="tab-pane fade" id="tab4">
-
-							<!-- 상단 테이블 -->
-							<div>
-								<table class="table">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-										</tr>
-									</thead>
-								</table>
-
-								<!-- 바디 테이블 -->
-								<table class="table table-striped">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-
-									<!------------------- Template + Data ---------------------->
-									<tbody class="table-group faqInfoList" id="accordion">
-
-										<!-- 여기에 faq [정보관련]리스트 추가 -->
-
-									</tbody>
-								</table>
-								<!-- 상단 테이블  끝 -->
-							</div>
-							<!-- [정보관련] 4번째 텝 끝-->
-						</div>
-
-						<!------------- [고객센터] 5번째 텝  ---------------->
-						<div class="tab-pane fade" id="tab5">
-
-							<!-- 상단 테이블 -->
-							<div>
-								<table class="table">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>분류</th>
-											<th>제목</th>
-										</tr>
-									</thead>
-								</table>
-
-								<!-- 바디 테이블 -->
-								<table class="table table-striped">
-									<colgroup>
-										<col width="116">
-										<col width="183">
-										<col width="638">
-									</colgroup>
-
-									<!------------------- Template + Data ---------------------->
-									<tbody class="table-group faqCenterList" id="accordion">
-
-										<!-- 여기에 faq [고객센터]리스트 추가 -->
-
-									</tbody>
-								</table>
-								<!-- 상단 테이블  끝 -->
-							</div>
-							<!-- [고객센터] 5번째 텝 끝-->
-						</div>
-
-						<!-- Tap클래스 끝 부분 -->
-					</div>
-					<!-- 하단Table 클래스 끝 -->
+<div id="buytogetherHeader"></div>
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-topbar c-layout-header-topbar-collapse">
+	
+	<!-- BEGIN: PAGE CONTAINER -->
+	<div class="c-layout-body">
+	
+	<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-3 -->
+		<div
+			class="c-layout-breadcrumbs-1 c-bgimage c-subtitle c-fonts-uppercase c-fonts-bold c-bg-img-center"
+			style="background-image: url(/resources/theme/img/content/backgrounds/bg-96.jpg)">
+			<div class="container">
+				<div class="c-page-title c-pull-left">
+					<h3
+						class="c-font-uppercase c-font-bold c-font-dark c-font-20 c-font-slim">FAQ</h3>
+					<h4 class="c-font-dark c-font-slim">Page Sub Title Goes Here</h4>
 				</div>
+				<ul
+					class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+					<li><a href="#" class="c-font-dark">고객센터</a></li>
+					<li class="c-font-dark">/</li>
+					<li><a href="page-faq.html" class="c-font-dark">FAQ</a></li>
 
-				<!----------------- pagination 하단 ------------------------------->
-				<form>
-					<fieldset class="centered">
-						<ul class="pagination">
-							<li><a href="#" aria-label="Previous"> <span
-									aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#" aria-label="Next"> <span
-									aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</fieldset>
-				</form>
+				</ul>
 			</div>
-			<!-- row 끝 부분 -->
 		</div>
+		<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-3 -->
+		
+		
+		<!-- BEGIN: PAGE CONTENT -->
+		<div class="c-content-box c-size-md">
+			<div class="container">
+				<!--------------------------------------- Tap 시작 ---------------------------------------------->
+				<div class="c-content-panel" style="border:none;">
+					<div class="c-body">
+						<div class="c-content-tab-1 c-theme c-margin-t-30">
+							<div class="clearfix">
+								<ul class="nav nav-tabs c-font-uppercase c-font-bold tabs_tap_1"
+									id="userTab">
+
+									<li role="presentation" class="allTab" ><a type="button"
+										data-toggle="tab" data-target="#tab_1_1_content" role="tab">ALL
+											NEWS</a></li>
+									<li role="presentation" class="userTab"><a type="button"
+										data-toggle="tab" data-target="#tab_1_2_content" role="tab">About
+											USER</a></li>
+									<li role="presentation" class="buyTab"><a type="button"
+										data-toggle="tab" data-target="#tab_1_3_content" role="tab">About
+											BUY</a></li>
+									<li role="presentation" class="infoTab"><a type="button"
+										data-toggle="tab" data-target="#tab_1_4_content" role="tab">About
+											INFO</a></li>
+									<li role="presentation" class="customerTab"><a
+										type="button" data-toggle="tab" data-target="#tab_1_5_content"
+										role="tab">About C/C</a></li>
+
+								</ul>
+							</div>
+							<div class="tab-content c-bordered c-padding-lg">
+
+								<!-- 전체 리스트 -->
+								<div class="tab-pane active" id="tab_1_1_content">
+
+									<div class="faqAllList"></div>
+
+								</div>
+
+								<!-- 유저 리스트 -->
+								<div class="tab-pane" id="tab_1_2_content" role="tabpanel">
+
+									<div class="faqUserList"></div>
+
+								</div>
+
+								<!-- 사냥 리스트 -->
+								<div class="tab-pane" id="tab_1_3_content" role="tabpanel">
+
+									<div class="faqBuyList"></div>
+
+								</div>
+
+								<!-- 정보 리스트 -->
+								<div class="tab-pane" id="tab_1_4_content" role="tabpanel">
+
+									<div class="faqInfoList"></div>
+
+								</div>
+
+								<!-- 고객센터 리스트 -->
+								<div class="tab-pane" id="tab_1_5_content" role="tabpanel">
+
+									<div class="faqCustomerList"></div>
+
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END: PAGE CONTENT -->
 	</div>
+	<!-- END: PAGE CONTAINER -->
 
-	<!-- Template -->
+	<!----------------------------------- Template ---------------------------------->
 
-	<!-- [전체보기] -->
-	<script id="faqListTemplate" type="text/x-handlebars-template">
-
-{{#each.}}
-<div id="faqLi">
-	<tr data-toggle="collapse" data-target="#toggleAll{{indexHelper @key}}"
-		data-parent="#accordion">
-		<td>{{indexHelper @key}}</td>
-		<td>[전체보기]</td>
-		<td>{{board_title}}</td>
-	</tr>
-
-	<tr id="toggleAll{{indexHelper @key}}" class="collapse">
-		<td colspan="3">
-			<p>{{board_content}}</p>
-		</td>
-	</tr>
+	<!-- [ALL] -->
+	<script id="faqListAllTemplate" type="text/x-handlebars-template">
+{{#each.}}	
+<div id="faqLiAll">	
+	<a href="#{{indexHelper @key}}" data-toggle="collapse" data-target=".{{indexHelper @key}}">
+		<p class="c-font-sbold c-font-18 c-font-dark">{{board_title}}</p> 
+	</a>
+	<div id="{{indexHelper @key}}" class="collapse {{indexHelper @key}}">
+		&emsp;&emsp;<label><span class="c-content-line-icon c-icon-sm c-icon-48"></span>
+				<span class="c-font-15 c-font-slim">{{board_content}}<span></label>
+	</div>
 </div>
+<br>
 {{/each}}
 </script>
 
-
-	<!---------------------------- [회원관련] --------------------------->
+	<!-- [USER] -->
 	<script id="faqListUserTemplate" type="text/x-handlebars-template">
-
-{{#each.}}
-<div id="faqLiUser">
-	<tr data-toggle="collapse" data-target="#toggleUser{{indexHelper @key}}"
-		data-parent="#accordion">
-	<td>{{indexHelper @key}}</td>
-	<td>[회원관련]</td>
-	<td>{{board_title}}</td>
-	</tr>
-
-<tr id="toggleUser{{indexHelper @key}}" class="collapse">
-		<td colspan="3">
-			<p>{{board_content}}</p>
-		</td>
-	</tr>
+{{#each.}}	
+<div id="faqLiUser">	
+	<a href="#{{indexHelper @key}}" data-toggle="collapse" data-target=".{{indexHelper @key}}">
+		<p class="c-font-sbold c-font-18 c-font-dark">{{board_title}}</p> 
+	</a>
+	<div id="{{indexHelper @key}}" class="collapse {{indexHelper @key}}">
+		&emsp;&emsp;<label><span class="c-content-line-icon c-icon-sm c-icon-48 c-font-15 c-font-slim"></span>
+				<span class="c-font-15 c-font-slim">{{board_content}}</span></label>
+	</div>
 </div>
+<br>
 {{/each}}
 </script>
 
-	<!-------------------------- [사냥관련] ----------------------------->
+	<!-- [BUY] -->
 	<script id="faqListBuyTemplate" type="text/x-handlebars-template">
-
 {{#each.}}
-<div id="faqLiBuy">
-	<tr data-toggle="collapse" data-target="#toggleBuy{{indexHelper @key}}"
-		data-parent="#accordion">
-	<td>{{indexHelper @key}}</td>
-	<td>[사냥관련]</td>
-	<td>{{board_title}}</td>
-	</tr>
-
-<tr id="toggleBuy{{indexHelper @key}}" class="collapse">
-		<td colspan="3">
-			<p>{{board_content}}</p>
-		</td>
-	</tr>
+<div id="faqLiBuy">	
+	<a href="#{{indexHelper @key}}" data-toggle="collapse" data-target=".{{indexHelper @key}}">
+		<p class="c-font-sbold c-font-18 c-font-dark">{{board_title}}</p> 
+	</a>
+	<div id="{{indexHelper @key}}" class="collapse {{indexHelper @key}}" >
+		&emsp;&emsp;<label><span class="c-content-line-icon c-icon-sm c-icon-48 c-font-15 c-font-slim"></span>
+				<span class="c-font-15 c-font-slim">{{board_content}}</span></label>
+	</div>
 </div>
+<br>
+
 {{/each}}
 </script>
 
-<!-------------------------- [정보관련] ----------------------------->
+	<!-- [INFO] -->
 	<script id="faqListInfoTemplate" type="text/x-handlebars-template">
-
 {{#each.}}
-<div id="faqLiInfo">
-	<tr data-toggle="collapse" data-target="#toggleInfo{{indexHelper @key}}"
-		data-parent="#accordion">
-	<td>{{indexHelper @key}}</td>
-	<td>[정보관련]</td>
-	<td>{{board_title}}</td>
-	</tr>
-
-<tr id="toggleInfo{{indexHelper @key}}" class="collapse">
-		<td colspan="3">
-			<p>{{board_content}}</p>
-		</td>
-	</tr>
+<div id="faqLiInfo">	
+	<a href="#{{indexHelper @key}}" data-toggle="collapse" data-target=".{{indexHelper @key}}">
+		<p class="c-font-sbold c-font-18 c-font-dark">{{board_title}}</p> 
+	</a>
+	<div id="{{indexHelper @key}}" class="collapse {{indexHelper @key}}">
+		&emsp;&emsp;<label><span class="c-content-line-icon c-icon-sm c-icon-48 c-font-15 c-font-slim"></span>
+				<span class="c-font-15 c-font-slim">{{board_content}}<span></label>
+	</div>
 </div>
+<br>	
+
 {{/each}}
 </script>
 
-<!-------------------------- [고객센터] ----------------------------->
+	<!-- [CUSTOMERCENTER] -->
 	<script id="faqListCenterTemplate" type="text/x-handlebars-template">
-
 {{#each.}}
-<div id="faqLiCenter">
-	<tr data-toggle="collapse" data-target="#toggleCenter{{indexHelper @key}}"
-		data-parent="#accordion">
-	<td>{{indexHelper @key}}</td>
-	<td>[고객센터]</td>
-	<td>{{board_title}}</td>
-	</tr>
-<tr id="toggleCenter{{indexHelper @key}}" class="collapse">
-		<td colspan="3">
-			<p>{{board_content}}</p>
-		</td>
-	</tr>
+<div id="faqLiCustomer">	
+	<a href="#{{indexHelper @key}}" data-toggle="collapse" data-target=".{{indexHelper @key}}">
+		<p class="c-font-sbold c-font-18 c-font-dark">{{board_title}}</p> 
+	</a>
+	<div id="{{indexHelper @key}}" class="collapse {{indexHelper @key}}">
+		&emsp;&emsp;<label><span class="c-content-line-icon c-icon-sm c-icon-48 c-font-15 c-font-slim"></span>
+				<span class="c-font-15 c-font-slim">{{board_content}}<span></label>
+	</div>
 </div>
+<br>	
 {{/each}}
 </script>
 
-
-<!----------------------------- 번호 증가 ------------------------->
+	<!----------------------------- 번호 증가 ------------------------->
 	<script>
 		Handlebars.registerHelper("indexHelper", function(keyValue) {
 	
@@ -410,6 +239,28 @@ th, td {
 		});
 	</script>
 
+	<script src="/resources/theme/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="/resources/theme/js/wow.js"
+		type="text/javascript"></script>
+	<script
+		src="/resources/theme/js/reveal-animate.js"
+		type="text/javascript"></script>
+		
+	<!-- END: CORE PLUGINS -->
 
+	<!-- END: LAYOUT/BASE/BOTTOM -->
+	
+   	<div class="c-layout-go2top">
+	<i class="icon-arrow-up"></i>
+</div>
+<!-- END: BODY 끝 -->   	
+<div id="buytogetherFooter"></div>
+
+<script src="/resources/bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<script src="/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+        
 </body>
 </html>

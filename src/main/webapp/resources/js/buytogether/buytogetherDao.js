@@ -1,18 +1,25 @@
 function buytogetherDao() {
+	
+	//유저 관심 카테고리 존재 여부 확인
+	this.listUserInterest = function(user_number) {
+		
+		var result;
+		
+		$.ajax({
+			
+			url:'/restBuytogether/userInterest',
+			type: 'post',
+			data: {user_number : user_number},
+			dataType: 'text',
+			async : false,
+			success: function(data){
 
-	//같이사냥 리스트 요청
-	this.listAllDao = function() {
-
-		$.getJSON("/restBuytogether/list", function(data) {
-
-			var template = Handlebars.compile($('#listTemplate').html());
-
-			var html1 = template(data);
-
-			$(".buyTogetherLi").remove();
-			$("#buyTogetherList").html(html1);
+				result = data;
+			}
 		});
-	}
+		
+		return result;
+	};
 
 	//카테고리 리스트 요청
 	this.listCategoryDao = function() {
@@ -46,6 +53,23 @@ function buytogetherDao() {
 			});
 
 			$("#hunting_type_number").html(str);
+		});
+	}
+	
+	//사냥방식 리스트 요청
+	this.listHuntingStatusDao = function() {
+
+		$.getJSON("/restBuytogether/listHuntingStatus", function(data) {
+
+			var str = "<option value=''>선택해주세요.</option>";
+
+			$(data).each(function() {
+
+				str += "<option value='" + this.hunting_status_number + "'>";
+				str += this.status_name+"</option>";
+			});
+
+			$("#hunting_status_number").html(str);
 		});
 	}
 
@@ -91,7 +115,7 @@ function buytogetherDao() {
 		});
 	}
 
-	//게시글 쓰기
+	//게시글 삽입
 	this.insertDao = function(buytogether, buyTogetherAddress) {
 
 		$.ajax({
@@ -150,4 +174,57 @@ function buytogetherDao() {
 			}
 		});
 	}
+	
+	//같이사냥 리스트(지도)
+	this.listBuyTogetherMapDao = function(scri){
+		
+		var parsedResult;
+		
+		$.ajax({
+			type : 'post',
+			url : '/restBuytogether/maplistBuyTogether',
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			async : false,
+			dataType : 'text',
+			data : JSON.stringify(scri),
+			success : function(result) {
+
+				//data가 map에 담겨 있는 json형식의 문자열이므로 list를 쓰려면 한 단계 추가로 거쳐줘야함.
+				parsedResult = JSON.parse(result);
+
+			}
+		});
+		
+		return parsedResult;
+	}
+	
+	//같이사냥 리스트(기본)
+	this.listBuyTogetherDao = function(scri){
+		
+		var parsedResult;
+		
+		$.ajax({
+			type : 'post',
+			url : '/restBuytogether/listBuyTogether',
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			async : false,
+			dataType : 'text',
+			data : JSON.stringify(scri),
+			success : function(result) {
+
+				//data가 map에 담겨 있는 json형식의 문자열이므로 list를 쓰려면 한 단계 추가로 거쳐줘야함.
+				parsedResult = JSON.parse(result);
+
+			}
+		});
+		
+		return parsedResult;
+	}
+	
 }

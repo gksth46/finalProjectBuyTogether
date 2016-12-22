@@ -13,6 +13,12 @@ public class Admin {
 	public Admin() {
 
 	}
+	
+	public Admin(int admin_number, String admin_id, String admin_pw) {
+		this.admin_number = admin_number;
+		this.admin_id = admin_id;
+		this.admin_pw = admin_pw;
+	}	
 
 	public int getAdmin_number() {
 		return admin_number;

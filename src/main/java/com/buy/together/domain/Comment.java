@@ -7,9 +7,10 @@ public class Comment {
 	private int comment_number;
 	private String comment_content;
 	private Date comment_writeDate;
-	private int buyTogether_number;
+	private int buytogether_number;
 	private int user_number;
 	private int comment_type_number;
+	private int comment_parent_number;
 
 	public Comment() {
 
@@ -39,12 +40,12 @@ public class Comment {
 		this.comment_writeDate = comment_writeDate;
 	}
 
-	public int getBuyTogether_number() {
-		return buyTogether_number;
+	public int getBuytogether_number() {
+		return buytogether_number;
 	}
 
-	public void setBuyTogether_number(int buyTogether_number) {
-		this.buyTogether_number = buyTogether_number;
+	public void setBuytogether_number(int buytogether_number) {
+		this.buytogether_number = buytogether_number;
 	}
 
 	public int getUser_number() {
@@ -61,6 +62,14 @@ public class Comment {
 
 	public void setComment_type_number(int comment_type_number) {
 		this.comment_type_number = comment_type_number;
+	}
+
+	public int getComment_parent_number() {
+		return comment_parent_number;
+	}
+
+	public void setComment_parent_number(int comment_parent_number) {
+		this.comment_parent_number = comment_parent_number;
 	}
 
 }

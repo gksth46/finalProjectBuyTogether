@@ -265,6 +265,7 @@
 		</div>
 	</div>
 =======
+>>>>>>> b1a152601c70e1bc054193deb7ecf8b9dfcd1abe
 <div class="col-md-3 col-xs-3 col-sm-3" >      
    <div class="row" id="buyTogetherLi">
 
@@ -286,7 +287,6 @@
 
       </div>
    </div>
->>>>>>> bc6e7721941673b9e3fb037de9008a3a9b015988
 </div>
 {{/each}}
 </script>
@@ -307,7 +307,6 @@ Handlebars.registerHelper("imageHelper", function(imagePath) {
 });
 
 Handlebars.registerHelper("dateHelper", function(timeValue) {
-<<<<<<< HEAD
 	
 	var dateObj = new Date(timeValue);
 	var year = dateObj.getFullYear();
@@ -315,16 +314,6 @@ Handlebars.registerHelper("dateHelper", function(timeValue) {
 	var date = dateObj.getDate();
 	
 	return year+"/"+month+"/"+date;
-	
-=======
-   
-   var dateObj = new Date(timeValue);
-   var year = dateObj.getFullYear();
-   var month = dateObj.getMonth() + 1;
-   var date = dateObj.getDate();
-   
-   return year+"/"+month+"/"+date;
-   
 });
 
 Handlebars.registerHelper("titleHelper", function(titleValue) {
@@ -337,23 +326,10 @@ Handlebars.registerHelper("titleHelper", function(titleValue) {
    
    return titleValue;
 
->>>>>>> bc6e7721941673b9e3fb037de9008a3a9b015988
 });
 
-Handlebars.registerHelper("titleHelper", function(titleValue) {
-	
-	if(titleValue.length > 10) {
-		
-		titleValue = titleValue.substring(0,10);
-		titleValue = titleValue + "...";
-	}
-	
-	return titleValue;
-
-});
 
 </script>
-
 
 </body>
 

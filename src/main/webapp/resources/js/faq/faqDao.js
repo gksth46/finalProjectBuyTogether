@@ -2,95 +2,141 @@ function faqDao() {
 
 	//FAQ [전체보기] 리스트
 	this.listAllDao = function(){
+		
+		var data;
 
-		$.getJSON("/restCustomerCenter/faqAllList", function(data) {
+		$.ajax({
+			type : 'get',
+			url : '/restCustomerCenter/faqAllList/',
+			async : false,
+			headers : {
 
-			var template1 = Handlebars.compile($('#faqListTemplate').html());
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override": "GET"
 
-			var html1 = template1(data);
+			},
+			dataType : 'json',
+			success : function(result){
 
-			console.log(data);
+				data = result;
 
-			$(".faqLi").remove();
+			}
 
-			$(".faqAllList").html(html1);
 		});
+
+		return data;
 
 	}
 
 	//FAQ [회원관련] 리스트
 	this.listUserDao = function(){
 
-		$.getJSON("/restCustomerCenter/faqUserList", function(data){
+		var data;
 
-			var template2 = Handlebars.compile($('#faqListUserTemplate').html());
+		$.ajax({
+			type : 'get',
+			url : '/restCustomerCenter/faqUserList/',
+			async : false,
+			headers : {
 
-			var html2 = template2(data);
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override": "GET"
 
-			console.log(data);
+			},
+			dataType : 'json',
+			success : function(result){
 
-			$(".faqLiUser").remove();
+				data = result;
 
-			$(".faqUserList").html(html2);
+			}
 
 		});
+
+		return data;
 
 	}
 
 	//FAQ [사냥관련] 리스트
 	this.listBuyDao = function(){
 
-		$.getJSON("/restCustomerCenter/faqBuyList", function(data){
+		var data;
 
-			var template3 = Handlebars.compile($('#faqListBuyTemplate').html());
+		$.ajax({
+			type : 'get',
+			url : '/restCustomerCenter/faqBuyList/',
+			async : false,
+			headers : {
 
-			var html3 = template3(data);
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override": "GET"
 
-			console.log(data);
+			},
+			dataType : 'json',
+			success : function(result){
 
-			$(".faqLiBuy").remove();
+				data = result;
 
-			$(".faqBuyList").html(html3);
+			}
 
 		});
+
+		return data;
 
 	}
 
 	//FAQ [정보관련] 리스트
 	this.listInfoDao = function(){
 
-		$.getJSON("/restCustomerCenter/faqInfoList", function(data){
+		var data;
 
-			var template4 = Handlebars.compile($('#faqListInfoTemplate').html());
+		$.ajax({
+			type : 'get',
+			url : '/restCustomerCenter/faqInfoList/',
+			async : false,
+			headers : {
 
-			var html4 = template4(data);
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override": "GET"
 
-			console.log(data);
+			},
+			dataType : 'json',
+			success : function(result){
 
-			$(".faqLiInfo").remove();
+				data = result;
 
-			$(".faqInfoList").html(html4);
+			}
 
 		});
+
+		return data;
 
 	}
 
 	//FAQ [고객관련] 리스트
 	this.listCenterDao = function(){
 
-		$.getJSON("/restCustomerCenter/faqCenterList", function(data){
+		var data;
 
-			var template5 = Handlebars.compile($('#faqListCenterTemplate').html());
+		$.ajax({
+			type : 'get',
+			url : '/restCustomerCenter/faqCenterList/',
+			async : false,
+			headers : {
 
-			var html5 = template5(data);
+				"Content-type" : "application/json",
+				"X-HTTP-Method-Override": "GET"
 
-			console.log(data);
+			},
+			dataType : 'json',
+			success : function(result){
 
-			$(".faqLiCenter").remove();
+				data = result;
 
-			$(".faqCenterList").html(html5);
+			}
 
 		});
+
+		return data;
 
 	}
 }

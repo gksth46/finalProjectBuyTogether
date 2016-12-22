@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<!-- 웹페이지에서 사용되는 글은 한글 -->
+<html lang="ko-kr">
+<head>
+<!-- 부라우저 최신 버젼 적용 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 해상도 자동 맞춤, 반응형 웹 페이지 적용 부분 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 웹 브라우저에서 다양한 언어 사용 가능 -->
+<meta charset="UTF-8">
+
+<!-- Bootstrap 적용 부분 -->
+<link href="/resources/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- jQuery 부분 -->
+<script src="/resources/bootstrap/js/jquery-3.1.1.min.js"></script>
+<!-- Bootstrap에서 사용하는 자바스크립트 부분 -->
+<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+
+<!--  핸들바를 쓰기 위한 스크립트!!! -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="/resources/js/faq/faqEventHandler.js"></script>
+
+
+<style type="text/css">
+.centered {
+	text-align: center;
+}
+
+th, td {
+	text-align: center;
+}
+</style>
+
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+	<br>
+		<div class="row">
+			<form>
+				<h1 class="centered">FAQ</h1>
+			</form>
+		</div>
+
+		<br> <br>
+
+
+		<div class="row">
+			
+			<div class="box">
+
+				<!-- 하단 Tap  -->
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab1" data-toggle="tab">전체보기</a></li>
+						<li role="presentation"><a href="#tab2" data-toggle="tab">회원가입</a></li>
+						<li role="presentation"><a href="#tab3" data-toggle="tab">사냥관련</a></li>
+						<li role="presentation"><a href="#tab4" data-toggle="tab">정보관련</a></li>
+						<li role="presentation"><a href="#tab5" data-toggle="tab">고객센터</a></li>
+					</ul>
+
+					<!-------------- tab content 시작 ----------------->
+					<div class="tab-content">
+
+						<!-------------------- [전체보기] 관련 1번째 텝-------------- -->
+						<div class="tab-pane fade in active" id="tab1">
+
+							<!-- 상단 테이블 -->
+							<div>
+								<table class="table">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+										</tr>
+									</thead>
+								</table>
+
+								<!-- 바디 테이블 -->
+								<table class="table table-striped">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+
+									<!------------------- Template + Data ---------------------->
+									<tbody class="table-group faqAllList" id="accordion">
+
+										<!-- 여기에 faq[전체보기] 리스트 추가 -->
+
+									</tbody>
+								</table>
+								<!-- 상단 테이블  끝 -->
+							</div>
+						</div>
+
+						<!----------------- [회원관련] 2번째 텝  -------------------------->
+						<div class="tab-pane fade" id="tab2">
+
+							<!-- 상단 테이블 -->
+							<div>
+								<table class="table">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+										</tr>
+									</thead>
+								</table>
+
+								<!-- 바디 테이블 -->
+								<table class="table table-striped">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+
+									<!------------------- Template + Data ---------------------->
+									<tbody class="table-group faqUserList" id="accordion">
+
+										<!-- 여기에 faq [회원관련]리스트 추가 -->
+
+									</tbody>
+								</table>
+								<!-- 상단 테이블  끝 -->
+							</div>
+							<!-- [회원관련] 2번째 텝 끝-->
+						</div>
+
+						<!--------------- [사냥관련] 3번째 텝  ------------------------>
+						<div class="tab-pane fade" id="tab3">
+
+							<!-- 상단 테이블 -->
+							<div>
+								<table class="table">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+										</tr>
+									</thead>
+								</table>
+
+								<!-- 바디 테이블 -->
+								<table class="table table-striped">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+
+									<!------------------- Template + Data ---------------------->
+									<tbody class="table-group faqBuyList" id="accordion">
+
+										<!-- 여기에 faq [사냥관련]리스트 추가 -->
+
+									</tbody>
+								</table>
+								<!-- 상단 테이블  끝 -->
+							</div>
+							<!-- [사냥관련] 3번째 텝 끝-->
+						</div>
+
+						<!--------------- [정보관련] 4번째 텝  -------------------->
+						<div class="tab-pane fade" id="tab4">
+
+							<!-- 상단 테이블 -->
+							<div>
+								<table class="table">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+										</tr>
+									</thead>
+								</table>
+
+								<!-- 바디 테이블 -->
+								<table class="table table-striped">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+
+									<!------------------- Template + Data ---------------------->
+									<tbody class="table-group faqInfoList" id="accordion">
+
+										<!-- 여기에 faq [정보관련]리스트 추가 -->
+
+									</tbody>
+								</table>
+								<!-- 상단 테이블  끝 -->
+							</div>
+							<!-- [정보관련] 4번째 텝 끝-->
+						</div>
+
+						<!------------- [고객센터] 5번째 텝  ---------------->
+						<div class="tab-pane fade" id="tab5">
+
+							<!-- 상단 테이블 -->
+							<div>
+								<table class="table">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+										</tr>
+									</thead>
+								</table>
+
+								<!-- 바디 테이블 -->
+								<table class="table table-striped">
+									<colgroup>
+										<col width="116">
+										<col width="183">
+										<col width="638">
+									</colgroup>
+
+									<!------------------- Template + Data ---------------------->
+									<tbody class="table-group faqCenterList" id="accordion">
+
+										<!-- 여기에 faq [고객센터]리스트 추가 -->
+
+									</tbody>
+								</table>
+								<!-- 상단 테이블  끝 -->
+							</div>
+							<!-- [고객센터] 5번째 텝 끝-->
+						</div>
+
+						<!-- Tap클래스 끝 부분 -->
+					</div>
+					<!-- 하단Table 클래스 끝 -->
+				</div>
+
+				<!----------------- pagination 하단 ------------------------------->
+				<form>
+					<fieldset class="centered">
+						<ul class="pagination">
+							<li><a href="#" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</fieldset>
+				</form>
+			</div>
+			<!-- row 끝 부분 -->
+		</div>
+	</div>
+
+	<!-- Template -->
+
+	<!-- [전체보기] -->
+	<script id="faqListTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div id="faqLi">
+	<tr data-toggle="collapse" data-target="#toggleAll{{indexHelper @key}}"
+		data-parent="#accordion">
+		<td>{{indexHelper @key}}</td>
+		<td>[전체보기]</td>
+		<td>{{board_title}}</td>
+	</tr>
+
+	<tr id="toggleAll{{indexHelper @key}}" class="collapse">
+		<td colspan="3">
+			<p>{{board_content}}</p>
+		</td>
+	</tr>
+</div>
+{{/each}}
+</script>
+
+
+	<!---------------------------- [회원관련] --------------------------->
+	<script id="faqListUserTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div id="faqLiUser">
+	<tr data-toggle="collapse" data-target="#toggleUser{{indexHelper @key}}"
+		data-parent="#accordion">
+	<td>{{indexHelper @key}}</td>
+	<td>[회원관련]</td>
+	<td>{{board_title}}</td>
+	</tr>
+
+<tr id="toggleUser{{indexHelper @key}}" class="collapse">
+		<td colspan="3">
+			<p>{{board_content}}</p>
+		</td>
+	</tr>
+</div>
+{{/each}}
+</script>
+
+	<!-------------------------- [사냥관련] ----------------------------->
+	<script id="faqListBuyTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div id="faqLiBuy">
+	<tr data-toggle="collapse" data-target="#toggleBuy{{indexHelper @key}}"
+		data-parent="#accordion">
+	<td>{{indexHelper @key}}</td>
+	<td>[사냥관련]</td>
+	<td>{{board_title}}</td>
+	</tr>
+
+<tr id="toggleBuy{{indexHelper @key}}" class="collapse">
+		<td colspan="3">
+			<p>{{board_content}}</p>
+		</td>
+	</tr>
+</div>
+{{/each}}
+</script>
+
+<!-------------------------- [정보관련] ----------------------------->
+	<script id="faqListInfoTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div id="faqLiInfo">
+	<tr data-toggle="collapse" data-target="#toggleInfo{{indexHelper @key}}"
+		data-parent="#accordion">
+	<td>{{indexHelper @key}}</td>
+	<td>[정보관련]</td>
+	<td>{{board_title}}</td>
+	</tr>
+
+<tr id="toggleInfo{{indexHelper @key}}" class="collapse">
+		<td colspan="3">
+			<p>{{board_content}}</p>
+		</td>
+	</tr>
+</div>
+{{/each}}
+</script>
+
+<!-------------------------- [고객센터] ----------------------------->
+	<script id="faqListCenterTemplate" type="text/x-handlebars-template">
+
+{{#each.}}
+<div id="faqLiCenter">
+	<tr data-toggle="collapse" data-target="#toggleCenter{{indexHelper @key}}"
+		data-parent="#accordion">
+	<td>{{indexHelper @key}}</td>
+	<td>[고객센터]</td>
+	<td>{{board_title}}</td>
+	</tr>
+<tr id="toggleCenter{{indexHelper @key}}" class="collapse">
+		<td colspan="3">
+			<p>{{board_content}}</p>
+		</td>
+	</tr>
+</div>
+{{/each}}
+</script>
+
+
+<!----------------------------- 번호 증가 ------------------------->
+	<script>
+		Handlebars.registerHelper("indexHelper", function(keyValue) {
+	
+			return keyValue + 1;
+	
+		});
+	</script>
+
+
+</body>
+</html>

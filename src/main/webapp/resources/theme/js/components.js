@@ -38,7 +38,7 @@ var LayoutHeaderCart = function () {
 				});
 
 				$('body').on('click', function (e) {
-					if (!cart.is(e.target) && cart.has(e.target).length === 0) {
+					if (!cart.is(e.target) && cart.has(e.target).size() === 0) {
 						$('body').removeClass('c-header-cart-shown');
 					}
 				});

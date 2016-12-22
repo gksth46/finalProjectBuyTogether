@@ -3,7 +3,9 @@ package com.buy.together.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +28,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.buy.together.domain.BuyTogether;
 import com.buy.together.domain.BuyTogetherAddress;
 import com.buy.together.domain.Category;
+import com.buy.together.domain.HuntingStatus;
 import com.buy.together.domain.HuntingType;
+import com.buy.together.domain.ListSearchCriteria;
+import com.buy.together.domain.PageMaker;
 import com.buy.together.dto.BuyTogetherDTO;
 import com.buy.together.service.BuyTogetherService;
 import com.buy.together.util.UploadFileUtils;
@@ -38,18 +44,45 @@ public class BuyTogetherRestController {
 
 	@Inject
 	private BuyTogetherService service;
+	
+	//유저의 관심 카테고리 등록 여부 확인
+	@RequestMapping(value = "userInterest", method = RequestMethod.POST)
+	public ResponseEntity<Integer> requestUserInterest(int user_number) {
 
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ResponseEntity<List<BuyTogetherDTO>> ListTest() {
+		ResponseEntity<Integer> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(service.userInterest(user_number), HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-		ResponseEntity<List<BuyTogetherDTO>> entity = null;
+		}
+		return entity;
+	}
+
+	@RequestMapping(value = "maplistBuyTogether", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> requestMapListBuyTogether(@RequestBody ListSearchCriteria scri) {
+
+		ResponseEntity<Map<String, Object>> entity = null;
 
 		try {
 			
-			entity = new ResponseEntity<>(service.buyTogetherList(), HttpStatus.OK);
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(scri);
 			
+			int searchBuyTogetherCount = service.searchBuyTogetherCount(scri);
+			pageMaker.setTotalCount(searchBuyTogetherCount);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<BuyTogetherDTO> searchBuyTogether = service.searchBuyTogetherList(scri);
+			map.put("searchBuyTogether", searchBuyTogether);
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
@@ -57,8 +90,37 @@ public class BuyTogetherRestController {
 		return entity;
 	}
 	
+	@RequestMapping(value = "listBuyTogether", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> requestListBuyTogether(@RequestBody ListSearchCriteria scri) {
+
+		ResponseEntity<Map<String, Object>> entity = null;
+
+		try {
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(scri);
+			
+			int searchBuyTogetherCount = service.searchBuyTogetherCount(scri);
+			pageMaker.setTotalCount(searchBuyTogetherCount);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<BuyTogetherDTO> searchBuyTogether = service.searchBuyTogetherList(scri);
+			map.put("searchBuyTogether", searchBuyTogether);
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		}
+		return entity;
+	}
+
 	@RequestMapping(value = "listCategory", method = RequestMethod.GET)
-	public ResponseEntity<List<Category>> ListCategory() {
+	public ResponseEntity<List<Category>> requestListCategory() {
 
 		ResponseEntity<List<Category>> entity = null;
 
@@ -76,13 +138,31 @@ public class BuyTogetherRestController {
 	}
 
 	@RequestMapping(value = "listHuntingType", method = RequestMethod.GET)
-	public ResponseEntity<List<HuntingType>> ListHuntingType() {
+	public ResponseEntity<List<HuntingType>> requestListHuntingType() {
 
 		ResponseEntity<List<HuntingType>> entity = null;
 
 		try {
 
 			entity = new ResponseEntity<>(service.huntingTypeList(), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "listHuntingStatus", method = RequestMethod.GET)
+	public ResponseEntity<List<HuntingStatus>> requestListHuntingStatus() {
+
+		ResponseEntity<List<HuntingStatus>> entity = null;
+
+		try {
+
+			entity = new ResponseEntity<>(service.huntingStatusList(), HttpStatus.OK);
 
 		} catch (Exception e) {
 
@@ -99,6 +179,7 @@ public class BuyTogetherRestController {
 
 		HttpSession session = request.getSession();
 		String uploadPath = session.getServletContext().getRealPath("/") + "/resources/upload";
+		System.out.println(uploadPath);
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),HttpStatus.CREATED);
 
@@ -160,8 +241,8 @@ public class BuyTogetherRestController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public ResponseEntity<Integer> RequestInsert(BuyTogether buytogether) {
+	@RequestMapping(value = "write", method = RequestMethod.POST) //같이사냥 글쓰기
+	public ResponseEntity<Integer> RequestWrite(BuyTogether buytogether) {
 
 		ResponseEntity<Integer> entity = null;
 
@@ -179,7 +260,7 @@ public class BuyTogetherRestController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "addressWrite", method = RequestMethod.POST)
+	@RequestMapping(value = "addressWrite", method = RequestMethod.POST) //같이사냥 글쓰기시 주소 저장
 	public ResponseEntity<String> RequestInsertAddress(BuyTogetherAddress buytogetherAddress) {
 
 		ResponseEntity<String> entity = null;
@@ -197,5 +278,4 @@ public class BuyTogetherRestController {
 		return entity;
 	}
 	
-
 }

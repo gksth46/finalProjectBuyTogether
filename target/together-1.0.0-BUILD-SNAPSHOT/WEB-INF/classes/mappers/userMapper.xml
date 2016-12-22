@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mapper.UserMapper">
+	<!-- 닉네임 유저테이블 중복체크 -->
+	<select id="checkUserNickname" resultType="String">
+		select nickname
+		from user
+		where nickname = #{nickname}
+	</select>
+	<!-- 닉네임 관리자테이블 중복체크 -->
+	<select id="checkAdminNickname" resultType="String">
+		select admin_nickname
+		from admin
+		where admin_nickname = #{nickname}
+	</select>
+	<update id="registNickname">
+		update user
+		set nickname = #{nickname}
+		where user_number = #{user_number}
+	</update>
+
+	<insert id="registUserAddress">
+		insert into useraddress (user_sido, user_sigungu, user_dong, user_number) 
+		values (#{user_sido}, #{user_sigungu}, #{user_dong}, #{user_number})
+	</insert>
+	
+	<insert id="registInterest">
+		insert into interest (user_number, category_number) 
+		values (#{user_number}, #{category_number})
+	</insert>
+	
+</mapper>

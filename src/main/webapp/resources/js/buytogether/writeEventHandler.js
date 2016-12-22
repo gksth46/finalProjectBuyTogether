@@ -83,7 +83,7 @@ function saveFunction() {
 			joinin_number : data.joinin_number,
 			price : data.price,
 			category_number : data.category_number,
-			user_number : 1,
+			user_number : sessionStorage.getItem("number"),
 			hunting_type_number : data.hunting_type_number,
 			path : data.files
 	};

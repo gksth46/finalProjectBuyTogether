@@ -16,10 +16,7 @@ public class FaqController {
 	private static final Logger logger = LoggerFactory.getLogger(FaqController.class);
 
 	@RequestMapping(value ="/faq", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
-		System.out.println("customerCenter/faq");
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String requestFaq(Locale locale, Model model) {
 
 		return "/views/customerCenter/faq";
 	}

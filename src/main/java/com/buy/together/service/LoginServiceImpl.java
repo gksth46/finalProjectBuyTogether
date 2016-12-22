@@ -14,7 +14,11 @@ import org.json.XML;
 import org.springframework.stereotype.Repository;
 
 import com.buy.together.dao.LoginDao;
+import com.buy.together.domain.Admin;
 import com.buy.together.domain.User;
+import com.buy.together.dto.LoginDTO;
+import com.buy.together.util.BCrypt;
+import com.buy.together.util.SHA256;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,25 +30,56 @@ public class LoginServiceImpl implements LoginService {
 	private static final String clientId = "by6_tJPL7JlGEEddntmk";
 	private static final String clientSecret = "WRUaNm8T4x";
 	private static final String userProfileUrl = "https://apis.naver.com/nidlogin/nid/getUserProfile.xml";
-	//private static HttpServletRequest request = null;			
-	//private static HttpSession session = null;
-	//https://apis.naver.com/nidlogin/nid/getUserProfile.xml
+	SHA256 sha = SHA256.getInsatnce();
+	
+	//회원 및 관리자 로그인 정보 조회
 	@Override
-	public User buyTogetherLogin(User user) throws Exception {
+	public LoginDTO buyTogetherLogin(User user) throws Exception {
 		
-		User loginUser = loginDao.buyTogetherLogin(user);
+		User userLogin;
+		Admin adminLogin;
+		LoginDTO userInfo = null;
+
+        String shaPass = sha.getSha256(user.getPw().getBytes());
+        user.setPw(shaPass);
+        
+		userLogin = loginDao.buyTogetherUserLogin(user);
 		
-		return loginUser;
+		if(userLogin == null) { //로그인한 유저가 같이사냥 회원이 아니라면,
+			
+			adminLogin = new Admin(user.getUser_number(), user.getId(), user.getPw());
+			adminLogin = loginDao.buyTogetherAdminLogin(adminLogin);
+			
+			if(adminLogin != null) { //같이사냥 관리자가 로그인 했다면,
+				
+				userInfo = new LoginDTO(adminLogin.getAdmin_number(), adminLogin.getAdmin_id(), adminLogin.getAdmin_pw());
+				
+			} 
+			
+		} else { //같이사냥 회원이 로그인 했다면,
+
+			userInfo = new LoginDTO(userLogin.getUser_number(), userLogin.getId(), userLogin.getPw());
+			
+		}
+		
+		return userInfo;
+		
 	}
 
+	//페이스북 로그인 회원 정보 조회
 	@Override
-	public User externalLogin(User user) throws Exception {
+	public User facebookLogin(User user) throws Exception {
 		
+        String shaPass = sha.getSha256(user.getPw().getBytes());
+        String bcPass = BCrypt.hashpw(shaPass, BCrypt.gensalt());    
+        user.setPw(bcPass);
+        
 		User isNewUser = loginDao.externalLogin(user);
 		
-		if(isNewUser==null) { // //신규 회원이면 로그인 정보 저장
+		if(isNewUser == null) { //페이스북으로 로그인이 처음이라면,
 
 			loginDao.create(user);
+			isNewUser = loginDao.externalLogin(user);
 			
 		} 
 		
@@ -52,50 +87,40 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 	
+	//회원 정보 DB 저장
 	@Override
 	public void regist(User user) throws Exception {
-	
+		
 		loginDao.create(user);
 		
 	}
-
+	
+	//네이버 로그인 API
 	@Override
-	public User NaverUserLogin(String state, String code) throws Exception {		
-		//accessToken 요청 및 파싱부분
-		String data = getUserNaverToken(getAccessUrl(state, code), null);
-		Map<String,String> map = JSONStringToMap(data);   
-
+	public void NaverUserLogin(String state, String code) throws Exception {		
+		
+		String data = getUserNaverToken(getAccessUrl(state, code), null); //accessToken 요청 및 파싱
+		
+		Map<String,String> map = JSONStringToMap(data);  
 		String accessToken = map.get("access_token");
-
 		String tokenType = map.get("token_type"); 
-
+		// tokentype 와 accessToken을 조합한 값을 해더의 Authorization에 넣어 전송
 		String profileDataXml = getUserNaverToken(userProfileUrl, tokenType +" "+ accessToken); 
-		// tokentype 와 accessToken을 조합한 값을 해더의 Authorization에 넣어 전송합니다. 결과 값은 xml로 출력됩니다. 
-
-		JSONObject jsonObject =  XML.toJSONObject(profileDataXml);     //xml을 json으로 파싱합니다.
+		
+		JSONObject jsonObject =  XML.toJSONObject(profileDataXml); //xml을 json으로 파싱
 		JSONObject responseData = jsonObject.getJSONObject("data");   
-
-		//json의 구조가 data 아래에 자식이 둘인 형태여서 map으로 파싱이 안됩니다. 따라서 자식 노드로 접근합니다.
+		//json의 구조가 data 아래에 자식이 둘인 형태여서 map으로 파싱이 안되기 때문에 자식 노드로 접근
 		Map<String,String> userMap = JSONStringToMap(responseData.get("response").toString()); 
+		
+		User user = new User(Integer.parseInt(userMap.get("id")), userMap.get("name"), userMap.get("email"));
+		User naverUser = loginDao.externalLogin(user); //네이버 로그인 회원의 아이디 조회
+		
+		if(naverUser == null) { //네이버 로그인이 처음이라면,
 
-		String id = userMap.get("id");
-		String email = userMap.get("email");
-		String name = userMap.get("name");
-		
-		User user = new User();
-		user.setId(id);
-		user.setEmail(email);
-		user.setName(name);
-		
-		User naverUser = loginDao.externalLogin(user); //네이버 유저의 아이디가 DB에 있는지 확인
-		
-		if(naverUser == null) { //신규 회원
-
-			loginDao.create(user);
+			loginDao.create(user); //회원 정보 DB 저장
+			naverUser = loginDao.externalLogin(user);
 			
-		} 
-		
-		return naverUser;
+		}
 		
 	}	
 	
@@ -110,8 +135,7 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 
-
-	//사용자인증토큰을 받아옴
+	//사용자 인증 토큰 조회
 	private String getUserNaverToken(String url, String authorization) {
 
 		HttpURLConnection httpRequest = null;

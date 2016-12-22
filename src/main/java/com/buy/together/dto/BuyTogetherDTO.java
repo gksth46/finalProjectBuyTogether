@@ -17,14 +17,14 @@ public class BuyTogetherDTO {
 	private int price;
 	private double longitude;
 	private double latitude;
-	private String buytogether_address_sido;
-	private String buytogether_address_sigungu;
+	private String buytogether_address_road_address;
+	private String buytogether_address_detail;
 	private String category;
 	private String nickname;
 	private int reputation;
 	private String hunting_status;
 	private String hunting_type;
-	private List<AttachedPhoto> path;
+	private List<AttachedPhoto> photo_path;
 
 	public BuyTogetherDTO() {
 
@@ -110,20 +110,20 @@ public class BuyTogetherDTO {
 		this.latitude = latitude;
 	}
 
-	public String getBuytogether_address_sido() {
-		return buytogether_address_sido;
+	public String getBuytogether_address_road_address() {
+		return buytogether_address_road_address;
 	}
 
-	public void setBuytogether_address_road_address(String buytogether_address_sido) {
-		this.buytogether_address_sido = buytogether_address_sido;
+	public void setBuytogether_address_road_address(String buytogether_address_road_address) {
+		this.buytogether_address_road_address = buytogether_address_road_address;
 	}
 
-	public String getBuytogether_address_sigungu() {
-		return buytogether_address_sigungu;
+	public String getBuytogether_address_detail() {
+		return buytogether_address_detail;
 	}
 
-	public void setBuytogether_address_sigungu(String buytogether_address_sigungu) {
-		this.buytogether_address_sigungu = buytogether_address_sigungu;
+	public void setBuytogether_address_detail(String buytogether_address_detail) {
+		this.buytogether_address_detail = buytogether_address_detail;
 	}
 	
 	public String getCategory() {
@@ -166,12 +166,12 @@ public class BuyTogetherDTO {
 		this.hunting_type = hunting_type;
 	}
 
-	public List<AttachedPhoto> getPath() {
-		return path;
+	public List<AttachedPhoto> getPhoto_path() {
+		return photo_path;
 	}
 
-	public void setPath(List<AttachedPhoto> path) {
-		this.path = path;
+	public void setPhoto_path(List<AttachedPhoto> photo_path) {
+		this.photo_path = photo_path;
 	}
 	
 }

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.buyTogetherMapper">
+
+	<!-- 같이사냥 서치카운트 -->
+	<select id="searchBuyTogetherCount" resultType="int">
+		select count(bt.buytogether_number)
+		from buytogether bt
+		left outer join buytogetheraddress addr
+		on addr.buytogether_number = bt.buytogether_number 
+		<include refid="search"></include>
+	</select>
+
+	<!-- 같이사냥리스트 -->
+	<select id="searchBuyTogetherList" resultType="com.buy.together.dto.BuyTogetherDTO">
+	 	<![CDATA[
+        select bt.buytogether_number, bt.title, u.nickname, u.reputation, addr.latitude, addr.longitude
+        from user u,  buytogether bt, buytogetheraddress addr
+        where u.user_number = bt.user_number and bt.buytogether_number = addr.buytogether_address_number
+		]]>
+
+		<include refid="search"></include>
+			  
+		<![CDATA[
+		 order by sqrt(round(round(37.4785252-addr.latitude,10)*111000,10) * round(round(37.4785252 - addr.latitude,10)*111000,10)+  
+					round(round(126.8809673 - addr.longitude,10)*88800,10) * round(round(126.8809673 - addr.longitude,10)*88800,10))/1000 asc,
+					bt.buytogether_number desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
+	<!-- 같이사냥 리스트 조회 -->
+	<select id="buyTogetherList" resultType="com.buy.together.dto.BuyTogetherDTO">
+		select bt.buytogether_number, bt.title, bt.content, bt.writeDate, bt.updateDate, bt.duedate, bt.joinin_number,
+				bt.price, addr.longitude, addr.latitude, addr.buytogether_address_road_address, addr.buytogether_address_detail, c.category_name,
+				u.nickname, u.reputation, hs.status_name, ht.hunting_type
+		from buytogether bt, buytogetheraddress addr, huntingtype ht,
+			 huntingstatus hs, category c, user u
+		where addr.buytogether_number = bt.buytogether_number and hs.status_number = bt.status_number and
+			  ht.hunting_type_number = bt.hunting_type_number and c.category_number = bt.category_number and
+			  bt.user_number = u.user_number
+		order by buytogether_number desc
+	</select>
+	
+	<!-- 같이사냥 카테고리 조회 -->
+	<select id="categoryList" resultType="Category">
+		select *
+		from category
+	</select>
+	
+	<!-- 같이사냥 사냥방식 조회 -->
+	<select id="huntingTypeList" resultType="HuntingType">
+		select *
+		from huntingtype
+	</select>
+	
+	<!-- 같이사냥 사냥상태 조회 -->
+	<select id="huntingStatusList" resultType="HuntingStatus">
+		select *
+		from huntingstatus
+	</select>
+	
+	<!-- 같이사냥 게시글의 사진조회 -->
+	<select id="photoList" resultType="attachedPhoto">
+		select *
+		from attachedphoto 
+		where board_type_number = 5 and board_number = #{buytogether_number}
+		order by photo_number desc
+	</select>
+
+	
+	<!-- 같이사냥 글쓰기 1.게시글쓰기 -->
+	<insert id="buytogetherInsert">
+		insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+		values(#{title}, #{content}, #{dueDate}, #{joinin_number}, #{price}, #{category_number}, #{user_number}, #{hunting_type_number});
+	</insert>
+	
+	<!-- 같이사냥 글쓰기 - 쓴 게시글의 게시글 번호를 받아온다 -->
+	<select id="buytogetherNumber" resultType="Integer">
+	select buytogether_number
+	from buytogether
+	where title = #{title} and content = #{content};
+	</select>
+	
+	<!-- 같이사냥 글쓰기 2.첨부사진저장 -->
+	<insert id="buytogetherPhotoInsert">
+		insert into attachedphoto(path, buytogether_number, board_type_number)
+		values ( #{path}, #{buyTogether_number}, 5);
+	</insert>
+	
+	<!-- 같이사냥 글쓰기 3.같이사냥 주소저장 -->
+	<insert id="buytogetherAddressInsert">
+		insert into buytogetheraddress(latitude, longitude, buytogether_address_sido, buytogether_address_sigungu, buytogether_address_road_address, buytogether_address_detail, buytogether_number)
+		values (#{latitude}, #{longitude}, #{buyTogether_address_sido}, #{buyTogether_address_sigungu}, #{buyTogether_address_road_address}, #{buyTogether_address_detail}, #{buyTogether_number});
+	</insert>
+	
+	<!-- 검색용 코드 -->
+	<sql id="search">
+		<if test="category_number != 0">
+			and bt.category_number = #{category_number}
+		</if>
+		<if test="hunting_type_number != 0">
+			and bt.hunting_type_number = #{hunting_type_number}
+		</if>
+		<if test="hunting_status_number != 0">
+			and bt.hunting_status_number = #{hunting_status_number}
+		</if>
+		<if test="buytogether_address_sido != null">
+			and addr.buytogether_address_sido = #{buytogether_address_sido}
+		</if>
+		<if test="buytogether_address_sigungu != null">
+			and addr.buytogether_address_sigungu = #{buytogether_address_sigungu}
+		</if>
+		<if test="regDate != 0">
+			and bt.writeDate >= date_sub(now(), interval #{regDate} day)
+		</if>
+		<if test="keyword != ''">
+			and ( bt.title like CONCAT('%', #{keyword}, '%')
+			OR ( bt.content like CONCAT('%', #{keyword}, '%'))
+		</if>
+		
+	</sql>
+	
+</mapper>
+
+
+
+

@@ -58,7 +58,7 @@ function buytogetherController() {
 				searchBuyTogether[i].photo_path[0] = "/restBuytogether/displayFile?fileName=" + path;
 			}
 			str = str + "<div class='cbp-item'>";
-			str = str + "<a href='/buytogether/read?buytogether_number=" + searchBuyTogether[i].buyTogether_number;
+			str = str + "<a href='/buyTogether/read?buytogether_number=" + searchBuyTogether[i].buytogether_number;
 			str = str + "'class='cbp-caption'>";
 			str = str + "<div class='cbp-caption-defaultWrap'>";
 			str = str + "<img src='"+searchBuyTogether[i].photo_path[0]+"' alt=''>";

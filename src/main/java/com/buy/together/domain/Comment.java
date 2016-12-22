@@ -6,7 +6,7 @@ public class Comment {
 
 	private int comment_number;
 	private String comment_content;
-	private Date comment_writeDate;
+	private Date comment_writedate;
 	private int buytogether_number;
 	private int user_number;
 	private int comment_type_number;
@@ -32,12 +32,12 @@ public class Comment {
 		this.comment_content = comment_content;
 	}
 
-	public Date getComment_writeDate() {
-		return comment_writeDate;
+	public Date getComment_writedate() {
+		return comment_writedate;
 	}
 
-	public void setComment_writeDate(Date comment_writeDate) {
-		this.comment_writeDate = comment_writeDate;
+	public void setComment_writedate(Date comment_writedate) {
+		this.comment_writedate = comment_writedate;
 	}
 
 	public int getBuytogether_number() {

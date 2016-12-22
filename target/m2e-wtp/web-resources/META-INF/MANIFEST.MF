@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: kosta05
+=======
+Built-By: kosta13
+>>>>>>> 8cf220ba92ebda210deebf0204ff5b51d5cd0398
 Build-Jdk: 1.8.0_101
 Created-By: Maven Integration for Eclipse
 

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buy.together.mappers.buyTogetherReadMapper">
+
+	<!-- 같이사냥 게시글의 사진조회 -->
+	<select id="photoList" resultType="attachedPhoto">
+		select *
+		from attachedphoto
+		where board_type_number = 5 and buytogether_number =
+		#{buytogether_number}
+		order by photo_number desc;
+	</select>
+
+	<!-- 같이사냥 조회 -->
+	<select id="read" resultType="com.buy.together.dto.BuyTogetherDTO">
+		select bt.title, bt.content,
+		bt.buytogether_number, bt.duedate, u.nickname, u.gender, u.reputation,
+		bt.price, bt.buytogether_number ,ba.buytogether_address_sido,
+		ba.buytogether_address_sigungu, ba.buytogether_address_road_address,
+		ba.buytogether_address_detail, bt.writedate, bt.duedate,
+		hs.status_name, bt.joinin_number, count(j.buytogether_number) as
+		joinin_user
+		from user u, huntingstatus hs, buytogetheraddress ba, buytogether bt
+		left outer join joinin j on bt.buytogether_number =
+		j.buytogether_number
+		where ba.buytogether_address_number = bt.buytogether_number 
+		and bt.status_number = hs.status_number 
+		and bt.user_number = u.user_number
+		and bt.buytogether_number = #{buytogether_number}
+		group by
+		bt.buytogether_number;
+	</select>
+	
+	<!-- 같이사냥 게시판 삭제 -->
+	<delete id="deleteBuytogether" parameterType="java.util.Map">
+		delete from buytogether where buytogether_number = #{buytogether_number} and user_number = #{user_number};
+	</delete>
+
+	<!-- 같이사냥 댓글 리스트 -->
+	<select id="commentList" resultType="Comment" parameterType="java.util.Map">
+		select c.comment_number, c.comment_parent_number, c.comment_content,
+		c.comment_writedate, u.nickname, u.user_number
+		from comment c, user u
+		where c.buytogether_number = #{buytogether_number}
+		and c.comment_type_number = #{comment_type_number}
+		and u.user_number = c.user_number and c.comment_parent_number is null order by c.comment_number desc;
+	</select>
+
+	<!-- 같이사냥 댓글 쓰기 -->
+	<insert id="commentInsert">
+		insert into comment(comment_content,
+		buytogether_number, user_number, comment_type_number)
+		values(#{comment_content}, #{buytogether_number}, #{user_number},
+		#{comment_type_number});
+	</insert>
+
+	<!-- 같이사냥 댓글 삭제 -->
+	<delete id="commentDelete">
+		delete from comment
+		where comment_number = #{comment_number};
+	</delete>
+
+	<!-- 같이사냥 댓글 수정 -->
+	<update id="commentUpdate" parameterType="java.util.Map">
+		update comment set
+		comment_content = #{comment_content}
+		where buytogether_number =
+		#{buytogether_number}
+		and comment_number = #{comment_number};
+	</update>
+
+	<!-- 같이사냥 답글 쓰기 -->
+	<insert id="recommentInsert" parameterType="java.util.Map">
+		insert into
+		comment(comment_parent_number, comment_content, buytogether_number, user_number,comment_type_number)
+		values(#{comment_parent_number}, #{comment_content}, #{buytogether_number}, #{user_number}, #{comment_type_number});
+	</insert>
+
+	<!-- 같이사냥 답글 리스트 -->
+	<select id="recommentList" resultType="Comment" parameterType="java.util.Map">
+		select c.comment_number, c.comment_parent_number ,u.nickname, c.comment_content, c.comment_writedate, c.buytogether_number, c.user_number, c.comment_type_number 
+		from user u, comment c
+		where u.user_number = c.user_number 
+		and c.comment_type_number = #{comment_type_number} 
+		and c.comment_parent_number = #{comment_number};
+	</select>
+	
+	<!-- 같이사냥 버튼 클릭 -->
+	<insert id="registBuytogether" parameterType="java.util.Map">
+		insert into joinin(user_number, matching_status_number, buytogether_number)
+		values(#{user_number}, #{matching_status_number}, #{buytogether_number});
+	</insert>
+	
+	<!-- 같이사냥 찜하기 버튼 -->
+	<insert id="registDip" parameterType="java.util.Map">
+		insert into dip(user_number, buytogether_number)
+		values(#{user_number}, #{buytogether_number});
+	</insert>
+
+	<!-- 같이사냥 찜하기 취소 -->
+	<delete id="deleteDip" parameterType="java.util.Map">
+		delete from dip where user_number = #{user_number} and buytogether_number = #{buytogether_number};
+	</delete>
+	
+	<!-- 같이사냥 찜하기 확인 -->
+	<select id="checkDip" parameterType="java.util.Map" resultType = "int">
+		select dip_number
+		from dip 
+		where user_number = #{user_number} and buytogether_number = #{buytogether_number};
+	</select>
+	
+	<!-- 같이사냥 신고 내용 / 작성자  data -->
+	<select id="report" parameterType="java.util.Map" resultType = "Comment">
+		select c.buytogether_number, c.comment_number, u.nickname, c.comment_content, c.user_number, c.comment_type_number 
+		from user u, comment c
+		where u.user_number = c.user_number 
+		and c.comment_number = #{comment_number}
+		and c.buytogether_number = #{buytogether_number};
+	</select>
+	
+	<!-- 같이사냥 신고 내역 입력 -->
+	<insert id="sendReport">
+		insert into declareboard(buytogether_number, type_number, declare_category_number, user_number, declare_reason, declare_status)
+		values(#{buytogether_number}, #{type_number}, #{declare_category_number}, #{user_number}, #{declare_reason}, #{declare_status});
+	</insert>
+	
+</mapper>
+
+
+
+

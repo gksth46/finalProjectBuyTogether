@@ -7,7 +7,7 @@ import com.buy.together.domain.AttachedPhoto;
 
 public class BuyTogetherDTO {
 
-	private int buyTogether_number;
+	private int buytogether_number;
 	private String title;
 	private String content;
 	private Date writedate;
@@ -17,25 +17,31 @@ public class BuyTogetherDTO {
 	private int price;
 	private double longitude;
 	private double latitude;
+	private String buytogether_address_sido;
+	private String buytogether_address_sigungu;
 	private String buytogether_address_road_address;
 	private String buytogether_address_detail;
+	private String status_name;
 	private String category;
 	private String nickname;
 	private int reputation;
 	private String hunting_status;
 	private String hunting_type;
 	private List<AttachedPhoto> photo_path;
+	private int comment_number;
+	private String gender;
+	private int joinin_user;
 
 	public BuyTogetherDTO() {
 
 	}
 
-	public int getBuyTogether_number() {
-		return buyTogether_number;
+	public int getBuytogether_number() {
+		return buytogether_number;
 	}
 
-	public void setBuyTogether_number(int buyTogether_number) {
-		this.buyTogether_number = buyTogether_number;
+	public void setBuytogether_number(int buytogether_number) {
+		this.buytogether_number = buytogether_number;
 	}
 
 	public String getTitle() {
@@ -58,7 +64,7 @@ public class BuyTogetherDTO {
 		return writedate;
 	}
 
-	public void setWriteDate(Date writedate) {
+	public void setWritedate(Date writedate) {
 		this.writedate = writedate;
 	}
 
@@ -69,7 +75,7 @@ public class BuyTogetherDTO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	
+
 	public Date getDuedate() {
 		return duedate;
 	}
@@ -110,6 +116,22 @@ public class BuyTogetherDTO {
 		this.latitude = latitude;
 	}
 
+	public String getBuytogether_address_sido() {
+		return buytogether_address_sido;
+	}
+
+	public void setBuytogether_address_sido(String buytogether_address_sido) {
+		this.buytogether_address_sido = buytogether_address_sido;
+	}
+
+	public String getBuytogether_address_sigungu() {
+		return buytogether_address_sigungu;
+	}
+
+	public void setBuytogether_address_sigungu(String buytogether_address_sigungu) {
+		this.buytogether_address_sigungu = buytogether_address_sigungu;
+	}
+
 	public String getBuytogether_address_road_address() {
 		return buytogether_address_road_address;
 	}
@@ -125,7 +147,15 @@ public class BuyTogetherDTO {
 	public void setBuytogether_address_detail(String buytogether_address_detail) {
 		this.buytogether_address_detail = buytogether_address_detail;
 	}
-	
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -173,5 +203,29 @@ public class BuyTogetherDTO {
 	public void setPhoto_path(List<AttachedPhoto> photo_path) {
 		this.photo_path = photo_path;
 	}
-	
+
+	public int getComment_number() {
+		return comment_number;
+	}
+
+	public void setComment_number(int comment_number) {
+		this.comment_number = comment_number;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public int getJoinin_user() {
+		return joinin_user;
+	}
+
+	public void setJoinin_user(int joinin_user) {
+		this.joinin_user = joinin_user;
+	}
+
 }

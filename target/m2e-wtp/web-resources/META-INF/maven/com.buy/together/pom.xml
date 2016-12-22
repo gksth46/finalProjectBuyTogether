@@ -163,18 +163,38 @@
 			<version>1.16</version>
 		</dependency>
 
-<!-- 		spring-jdbc -->
+		<!-- spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.1.7.RELEASE</version>
 		</dependency>
 
-<!-- 		jackson-databind -->
+		<!-- jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
+		</dependency>
+		
+		<!-- commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!-- imgscalr-lib -->
+		<dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>4.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 	</dependencies>
 	<build>

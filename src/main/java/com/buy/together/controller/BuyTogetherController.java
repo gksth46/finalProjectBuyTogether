@@ -41,4 +41,13 @@ public class BuyTogetherController {
 
 	}
 	
+	@RequestMapping(value ="/write", method = RequestMethod.GET)
+	public String requestBuyTogetherWrite(Locale locale) {
+		
+		System.out.println("buyTogetherController/write");
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		return "/views/buyTogether/buytogetherwrite";
+	}
+	
 }

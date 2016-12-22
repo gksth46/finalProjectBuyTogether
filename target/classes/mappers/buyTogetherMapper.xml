@@ -25,6 +25,44 @@
 		where board_type_number = 5 and buytogether_number = #{buytogether_number}
 		order by photo_number desc
 	</select>
+	
+		<!-- 같이사냥 카테고리 조회 -->
+	<select id="categoryList" resultType="Category">
+		select *
+		from category
+	</select>
+	
+	<!-- 같이사냥 사냥방식 조회 -->
+	<select id="huntingTypeList" resultType="HuntingType">
+		select *
+		from huntingtype
+	</select>
+	
+	<!-- 같이사냥 글쓰기 1.게시글쓰기 -->
+	<insert id="buytogetherInsert">
+		insert into buytogether(title, content, duedate, joinin_number, price, category_number, user_number, hunting_type_number)
+		values(#{title}, #{content}, #{dueDate}, #{joinin_number}, #{price}, #{category_number}, #{user_number}, #{hunting_type_number});
+	</insert>
+	
+	<!-- 같이사냥 글쓰기 - 쓴 게시글의 게시글 번호를 받아온다 -->
+	<select id="buytogetherNumber" resultType="Integer">
+	select buytogether_number
+	from buytogether
+	where title = #{title} and content = #{content};
+	</select>
+	
+	<!-- 같이사냥 글쓰기 2.첨부사진저장 -->
+	<insert id="buytogetherPhotoInsert">
+		insert into attachedphoto(path, buytogether_number, board_type_number)
+		values ( #{path}, #{buyTogether_number}, 5);
+	</insert>
+	
+	<!-- 같이사냥 글쓰기 3.같이사냥 주소저장 -->
+	<insert id="buytogetherAddressInsert">
+		insert into buytogetheraddress(latitude, longitude, buytogether_address_sido, buytogether_address_sigungu, buytogether_address_road_address, buytogether_address_detail, buytogether_number)
+		values (#{latitude}, #{longitude}, #{buyTogether_address_sido}, #{buyTogether_address_sigungu}, #{buyTogether_address_road_address}, #{buyTogether_address_detail}, #{buyTogether_number});
+	</insert>
+	
 </mapper>
 
 

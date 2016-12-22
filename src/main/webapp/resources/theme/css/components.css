@@ -6746,7 +6746,7 @@ h1 {
 .c-content-title-1 > .c-line-left {
   width: 30px;
   height: 3px;
-  background-color: #32c5d2;
+  background-color: #2364F8; /* 수정 */
   margin: 0 0 30px 0; }
 
 .c-content-title-1 > .c-line-right {

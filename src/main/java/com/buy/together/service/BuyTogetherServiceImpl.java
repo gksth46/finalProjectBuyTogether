@@ -5,9 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.buy.together.dao.BuyTogetherDao;
 import com.buy.together.domain.AttachedPhoto;
+import com.buy.together.domain.BuyTogether;
+import com.buy.together.domain.BuyTogetherAddress;
+import com.buy.together.domain.Category;
+import com.buy.together.domain.HuntingType;
 import com.buy.together.dto.BuyTogetherDTO;
 
 @Service
@@ -30,5 +35,44 @@ public class BuyTogetherServiceImpl implements BuyTogetherService {
 		}
 		
 		return buyTogether;
+	}
+	
+	@Override
+	public List<Category> categoryList() throws Exception {
+
+		return dao.categoryList();
+	}
+
+	@Override
+	public List<HuntingType> huntingTypeList() throws Exception {
+
+		return dao.huntingTypeList();
+	}
+
+	@Transactional
+	@Override
+	public Integer buyTogetherWrite(BuyTogether buyTogether) throws Exception {
+
+		dao.buyTogetherInsert(buyTogether);
+
+		//입력한 같이사냥 글의 번호를 가져온다.
+		int number = dao.getBuyTogetherNumber(buyTogether);
+
+		if(buyTogether.getPath() != null){
+			for(int i=0; i<buyTogether.getPath().length; i++){
+				AttachedPhoto photo = new AttachedPhoto();
+				photo.setBuyTogether_number(number);
+				photo.setPath(buyTogether.getPath()[i]);
+				dao.buyTogetherPhotoInsert(photo);
+			}
+		}
+
+		return number;
+	}
+
+	@Override
+	public void buyTogetherWriteAddress(BuyTogetherAddress buyTogetherAddress) throws Exception {
+
+		dao.buyTogetherAddressInsert(buyTogetherAddress);
 	}
 }
